@@ -3,7 +3,15 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('respond with a resource user');
 });
+
+router.put('/', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+
+router.delete('/', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
 
 module.exports = router;
