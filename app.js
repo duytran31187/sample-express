@@ -24,6 +24,17 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/items', itemsRouter); // have to load router module in app
 
+
+app.route('/homepage')
+   .get((req, res, next) => {
+    res.send("this is homepage");
+   });
+app.route('/book')
+   .get((req, res) => {
+     res.send('Get a random book')
+   });
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
