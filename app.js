@@ -20,14 +20,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // Serving static files: ex: 
 
+app.use((req, res, next) => { // This example shows a middleware function with no mount path
+  console.log("new request called at: ", Date.now());
+  next(); // without this line, the next middleware will not be executed
+});
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', usersRouter); 
 app.use('/items', itemsRouter); // have to load router module in app
 
 
 app.route('/homepage')
    .get((req, res, next) => {
+    req.calledTime = Date.now();
+    console.log('before called homepage');
     res.send("this is homepage");
+    next();
+   }, (req, res, next) => {
+    console.log('end homepage');   
    });
 app.route('/book')
    .get((req, res) => {
